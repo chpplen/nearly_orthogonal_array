@@ -1,0 +1,1 @@
+{"num_round": 100, "eta": 0.1, "min_child_weight": 1, "max_depth": 3, "subsample": 0.7, "colsample_bytree": 0.7, "scale_pos_weight": 1}

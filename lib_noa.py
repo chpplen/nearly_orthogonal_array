@@ -95,16 +95,17 @@ def fillin():
     alphabet = ['', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
                 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
     
-    s = os.path.dirname(os.path.dirname(__file__))
-
-    csvfile = open(s+'\\OAs\OA_list.csv', 'r', newline='')
+    # s = os.path.dirname(os.path.dirname(__file__))
+    # csvfile = open(s+'\\OAs\OA_list.csv', 'r', newline='')
+    csvfile = open('OAs/OA_list.csv', 'r', newline='')
     oa_list_file = csv.reader(csvfile)
     header = next(oa_list_file)
 
     NN = 0
 
     for line in oa_list_file:
-        if os.path.exists(s + '\\OAs\\' + str(line[1]) + '.csv') == 0:
+        # if os.path.exists(s + '\\OAs\\' + str(line[1]) + '.csv') == 0:
+        if os.path.exists('/OAs/' + str(line[1]) + '.csv') == 0:
             name = name2levels(line[1])
             nn_level = []
             nn_runs = 1
@@ -119,7 +120,8 @@ def fillin():
                 nn_length = 3  # len(name)
 
                 new_file = open(
-                    s + '\\OAs\\' + str(line[1]) + '.csv', 'w', newline='')
+                    # s + '\\OAs\\' + str(line[1]) + '.csv', 'w', newline='')
+                    '/OAs/' + str(line[1]) + '.csv', 'w', newline='')
                 w = csv.writer(new_file)
                 first_row = []
                 for i in range(0, len(name)+1, 1):
@@ -268,8 +270,9 @@ def generate(levels, N_runs=None, isOA=False, weight=[], interchangeType="mix", 
 def getDesign(name):
     """get the design"""
 
-    s = os.path.dirname(os.path.dirname(__file__))
-    filename = s + '/OAs/' + str(name) + '.csv'
+    # s = os.path.dirname(os.path.dirname(__file__))
+    # filename = s + '/OAs/' + str(name) + '.csv'
+    filename = 'OAs/' + str(name) + '.csv'
     csvfile = open(filename, 'r', newline='')
     oa_design_file = csv.reader(csvfile)
     header = next(oa_design_file)
@@ -353,8 +356,9 @@ def getLeftDic(origin_dic, replace_dic):
 def getLists():
     """get all OA list"""
 
-    s = os.path.dirname(os.path.dirname(__file__))
-    csvfile = open(s+'/OAs/OA_list.csv', 'r', newline='')
+    # s = os.path.dirname(os.path.dirname(__file__))
+    # csvfile = open(s+'/OAs/OA_list.csv', 'r', newline='')
+    csvfile = open('OAs/OA_list.csv', 'r', newline='')
     oa_list_file = csv.reader(csvfile)
     header = next(oa_list_file)
 
@@ -1094,7 +1098,7 @@ OAList = getLists()
 # levels_sep = levelsSeperate([5,32,1,5,63,2],[5,2,1],{5:1,2:1,1:1})
 # design = LCM({4:1,2:1,3:1})
 
-# design = generate([2]*20, isOA = True)
+design = generate([2]*20, N_runs=16)
 # design = generate([2]*20+[5]*6+[3]*15, isOA = True)
 # design = generate([2]*2+[5]*3+[3]*3, isOA = True)
 # design = generate([2]*3+[3]*2+[5]*6+[8], isOA = True)
